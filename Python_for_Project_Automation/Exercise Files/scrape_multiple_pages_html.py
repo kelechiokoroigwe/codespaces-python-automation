@@ -8,7 +8,7 @@ from time import sleep
 for page_number in range(1,4):
 
     # define the url
-    url = "FILL IN"+str(page_number)
+    url = "https://kibworthbooks.com/collections/childrens-age-9?page="+str(page_number)
 
     # send a request to get html code from that url
     response = requests.get(url, headers={"Accept": "text/html"}) 
@@ -17,10 +17,10 @@ for page_number in range(1,4):
     parsed_response = BeautifulSoup(response.text, "html.parser") 
 
     # extract all the elements specific to book titles from that page
-    title_elements = parsed_response.find_all("a", class_="block__item-title")
+    title_elements = parsed_response.find_all("div", class_="product-card__name")
 
     # extract all the elements specific to book authors from that page
-    author_elements = parsed_response.find_all("a", class_="block__item-author")
+    author_elements = parsed_response.find_all("div", style="width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;")
 
     # print out the page number 
     print("\nPage Number:", page_number)
